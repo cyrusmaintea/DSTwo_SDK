@@ -1,24 +1,24 @@
 #include "sys.h"
 
-FILE_STRUCT* 	tempFile;
-FILE_STRUCT* 	tempCache;
-FAT*			driver;
+FILE_STRUCT* 			tempFile;
+FILE_STRUCT* 			tempCache;
+FAT*					driver;
 
-DIR_STATE_STRUCT	*dp;
-DIR_ENTRY			*ep;
+DIR_STATE_STRUCT		*dp;
+DIR_ENTRY				*ep;
 
-struct rtc sysTimeClock;
-struct key_buf input;
+struct rtc 				sysTimeClock;
+struct key_buf 			input;
 
-unsigned int timerz;
-unsigned int key;
+unsigned int 			timerz;
+unsigned int 			key;
 
 void ds2_main() {
 
 	if(ds2io_init(1024))
 		goto _failure;
 
-	if(ConsoleInit(YELLOW, BACK_COLOR, DOWN_SCREEN, 10))
+	if(ConsoleInit(BLACK_COLOR, WHITE_COLOR, DOWN_SCREEN, 10))
 		goto _failure;
 
 	if(fat_init())
