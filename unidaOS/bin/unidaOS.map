@@ -1,0 +1,35 @@
+
+./bin/unidaOS.elf:     file format elf32-tradlittlemips
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0008b2e0  80002000  80002000  00002000  2**4
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00001858  8008d2e0  8008d2e0  0008d2e0  2**4
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .sbss         00000350  8008eb38  8008eb38  0008eb38  2**3
+                  ALLOC
+  3 .bss          00008458  8008ee90  8008ee90  0008eb38  2**4
+                  ALLOC
+  4 .pdr          000080e0  00000000  00000000  0008eb38  2**2
+                  CONTENTS, READONLY
+  5 .comment      000016a4  00000000  00000000  00096c18  2**0
+                  CONTENTS, READONLY
+  6 .debug_abbrev 000017f1  00000000  00000000  000982bc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_info   00002f24  00000000  00000000  00099aad  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000a93  00000000  00000000  0009c9d1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000002c0  00000000  00000000  0009d464  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000abf  00000000  00000000  0009d724  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_pubnames 00000283  00000000  00000000  0009e1e3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_aranges 00000220  00000000  00000000  0009e466  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_str    000004a8  00000000  00000000  0009e686  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 14 .debug_ranges 000000b8  00000000  00000000  0009eb2e  2**0
+                  CONTENTS, READONLY, DEBUGGING
