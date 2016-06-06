@@ -37,9 +37,13 @@ void Start() {
 
 	ClearConsole();
 
-	printf("\tunidaOS %s\n", VERSION);
+	printf("Welcome to unidaOS %s\n", VERSION);
 	printf("\t\tPress Select to Exit.\n"
-		   "\t\tPress R for Soft Reset.\n");
+		   "\t\tPress Y for Soft Reset.\n"
+	   	   "\t\t\tInput Control\n"
+		   "(A) - Program Counter\n"
+	       "(B) - System Time\n"
+		   "(X) - Filesystem Information\n");
 
 	while(1) {
 		Update();
@@ -54,7 +58,6 @@ void Update() {
 	if(key) {
 		if(input.key & KEY_TOUCH) {
 			ClearConsole();
-			printf("Screen Touch\n");
 		} else if(input.key & KEY_UP) {
 			printf("Up\n");
 		} else if(input.key & KEY_DOWN) {
@@ -66,23 +69,19 @@ void Update() {
 		} else if(input.key & KEY_A) {
 			Time();
 		} else if(input.key & KEY_B) {
-			printf("A\n");
 			ReadClock();
 		} else if(input.key & KEY_X) {
-			printf("X\n");
 			SettingInfo();
 		} else if(input.key & KEY_Y) {
-			printf("Y\n");
+			Start();
 		} else if(input.key & KEY_START) {
 			printf("Start\n");
 		} else if(input.key & KEY_SELECT) {
-			printf("Select\n");
 			SystemExit();
 		} else if(input.key & KEY_R) {
 			printf("R\n");
-			Start();
 		} else if(input.key & KEY_LID) {
-			printf("NDS Was Closed\n");
+			printf("Lid Was Closed\n");
 		} else if(input.key & KEY_L) {
 			printf("L\n");
 		}
@@ -112,8 +111,8 @@ void ReadClock() {
 	unsigned char month = sysTimeClock.month;
 	unsigned char day = sysTimeClock.day;
 
-	fat_fprintf(tempFile, "\n24Hr Clock\t- %d : %d : %d", sysTimeClock.hours, sysTimeClock.minutes, sysTimeClock.seconds);
-	fat_fprintf(tempFile, "\nTodays Date\t- %d : %d : %d", sysTimeClock.month, sysTimeClock.day, sysTimeClock.year);
+	fat_fprintf(tempFile, "\n24Hr Cloc - %d : %d : %d ", sysTimeClock.hours, sysTimeClock.minutes, sysTimeClock.seconds);
+	fat_fprintf(tempFile, "\nTodays Date - %d : %d : %d ", sysTimeClock.month, sysTimeClock.day, sysTimeClock.year);
 
 	printf("24Hr Clock   - %d : %d : %d \n", sysTimeClock.hours, sysTimeClock.minutes, sysTimeClock.seconds);
 	printf("Todays Date  - %d-%d-%d\n", sysTimeClock.month, sysTimeClock.day, sysTimeClock.year);
@@ -127,15 +126,13 @@ void ReadDir() {
 
 	printf("\n\t[Device Read]\n");
 
-	//TODO
+	//TODO:
 
 	printf("\nCouldn't open the directory\n");
 }
 
 void ClearConsole() {
-
 	int i = 0;
-
 	do {
 		printf("\n");
 		++i;
@@ -151,11 +148,11 @@ void SystemExit() {
 	fat_fclose(tempFile);
 	fat_fclose(tempCache);
 
-	sleep(128);
+	sleep(256);
 
 	printf("\n\tSuccess!\n\tSend Term Signal...\n");
 
-	sleep(32);
+	sleep(128);
 
 	ds2_plug_exit();
 }
@@ -163,6 +160,8 @@ void SystemExit() {
 int Load() {
 
 	ClearConsole();
+
+	//TODO:
 
 	return 1;
 }
@@ -207,22 +206,21 @@ int SettingInfo() {
 	//unsigned int calc1			=	(totalSectors * bytePerSec);
 	unsigned int buffer 		= 	(partitionSize - (partitionSize * 2));
 	unsigned int megaSize 		= 	((buffer / 1000) / 8);
-	float gigaSize		=	((megaSize / 1000) / 10);
+	float gigaSize				=	((megaSize / 1000) / 10);
 
 
-	fat_fprintf(tempFile, "\n\t[Device Info]");
-	fat_fprintf(tempFile, "\nPartition Size\t\t- %d", buffer);
-	fat_fprintf(tempFile, "\nPartition Size MB\t\t- %d", megaSize);
-	fat_fprintf(tempFile, "\nPartition Size GB\t\t- %f", gigaSize);
-	fat_fprintf(tempFile, "\nTotal Sectors\t\t- %d", totalSectors);
-	fat_fprintf(tempFile, "\nBytes Per Sec\t\t- %d", bytePerSec);
-	fat_fprintf(tempFile, "\nRoot on Disk\t\t- %d", rootStart);
-	fat_fprintf(tempFile, "\n");
+	fat_fprintf(tempFile, "\n[Device Info] ");
+	fat_fprintf(tempFile, "\nPartition Size        - %d ", buffer);
+	fat_fprintf(tempFile, "\nPartition Size MB     - %d ", megaSize);
+	fat_fprintf(tempFile, "\nPartition Size GB     - %.2f ", gigaSize);
+	fat_fprintf(tempFile, "\nTotal Sectors         - %d ", totalSectors);
+	fat_fprintf(tempFile, "\nBytes Per Sec         - %d ", bytePerSec);
+	fat_fprintf(tempFile, "\nRoot on Disk          - %d ", rootStart);
 
-	printf("\t[Device Info]\n");
+	printf("\t[Device Info] \n");
 	printf("Partition Size		- %d\n", buffer);
 	printf("Partition Size MB	- %d\n", megaSize);
-	printf("Partition Size GB	- %f\n", gigaSize);
+	printf("Partition Size GB	- %.2f\n", gigaSize);
 	printf("Total Sectors		- %d\n", totalSectors);
 	printf("Bytes Per Sec		- %d\n", bytePerSec);
 	printf("Root on Disk		- %d\n", rootStart);

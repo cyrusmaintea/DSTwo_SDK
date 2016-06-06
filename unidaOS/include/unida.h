@@ -24,7 +24,7 @@
 /*
  *    Color Specs
  */
-#define CS              ((r / 8), (g / 8), (b / 8))
+#define COLOR_SHIFT     ((r / 8), (g / 8), (b / 8))
 #define BACK_COLOR		RGB15(4, 2, 6)
 #define BLACK_COLOR		RGB15(0, 0, 0)
 #define WHITE_COLOR		RGB15(31, 31, 31)

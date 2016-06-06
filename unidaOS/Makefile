@@ -1,4 +1,4 @@
-DL := f
+DL := D
 
 CROSS := /opt/toolchains/dstwo/bin/
 MKPLG := ../tools/makeplug.exe
